@@ -21,7 +21,6 @@ app.use("/api/messages", messageRoutes)
 
 const PORT = process.env.PORT || 5000
 const URI = process.env.MONGO_URI
-// const __dirname = path.resolve()
 
 cloudinary.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
