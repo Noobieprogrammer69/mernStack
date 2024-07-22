@@ -41,22 +41,22 @@ const connectDB = async () => {
 
 connectDB()
 
-app.get("/", (req, res) => {
-    res.status(200).send("Hello World")
-})
+if (process.env.NODE_ENV === "production") {
+    app.use(express.static(path.join(__dirname, "frontend", "dist")));
+
+    // Serve React App
+    app.get("*", (req, res) => {
+        res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"));
+    });
+} else {
+    app.get("/", (req, res) => {
+        res.status(200).send("Hello World");
+    });
+}
 
 server.listen(PORT, () => {
     console.log(`App is running on port: ${PORT}`)
 })
-
-if (process.env.NODE_ENV === "production") {
-	app.use(express.static(path.join(__dirname, "/frontend/dist")));
-
-	// react app
-	app.get("*", (req, res) => {
-		res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"));
-	});
-}
 
 
 
