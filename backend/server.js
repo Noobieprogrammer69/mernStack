@@ -8,8 +8,10 @@ const messageRoutes = require("./routes/messageRoutes")
 const cloudinary = require("cloudinary").v2
 const {io, server, app, getRecipientSocketId } = require("./socket/socket");
 const path = require("path")
+const job = require("./cron/cron")
 
 // const app = express()
+job.start()
 
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ limit: '10mb', extended: true })); 
